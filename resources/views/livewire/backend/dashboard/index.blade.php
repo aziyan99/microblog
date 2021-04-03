@@ -1,0 +1,10 @@
+@section('title', 'Dashboard')
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                Dashboard
+            </div>
+        </div>
+    </div>
+</div>
