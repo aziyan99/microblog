@@ -26,7 +26,7 @@
                         <label>Role</label>
                         <select wire:model="role"
                                 class="form-control @error('role') is-invalid @enderror">
-                            <option value="">-- pilih --</option>
+                            <option value="">-- choose --</option>
                             <option value="admin">admin</option>
                             <option value="writer">writer</option>
                         </select>

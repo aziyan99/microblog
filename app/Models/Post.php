@@ -11,7 +11,7 @@ class Post extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title', 'slug', 'thumbnail', 'category_id', 'body', 'views'
+        'title', 'slug', 'thumbnail', 'category_id', 'body', 'views', 'user_id'
     ];
 
     /**
@@ -27,5 +27,10 @@ class Post extends Model
     {
         $category = Category::find($this->id);
         return $category->name;
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

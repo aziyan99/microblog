@@ -23,6 +23,10 @@
                             <td>{{ $post->category->name }}</td>
                         </tr>
                         <tr>
+                            <th>Created by</th>
+                            <td>{{ $post->user->name }}</td>
+                        </tr>
+                        <tr>
                             <th>Thumbnail</th>
                             <td>
                                 <a href="{{ asset($post->thumbnail) }}" target="_blank">

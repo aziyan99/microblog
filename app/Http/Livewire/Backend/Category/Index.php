@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Backend\Category;
 
 use App\Models\Category;
+use Illuminate\Support\Facades\Gate;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Exports\CategoryExport;
@@ -38,11 +39,17 @@ class Index extends Component
 
     public function setDestroyId($id)
     {
+        if (! Gate::allows('isAdmin')) {
+            abort(403);
+        }
         $this->destroyId = $id;
     }
 
     public function destroy()
     {
+        if (! Gate::allows('isAdmin')) {
+            abort(403);
+        }
         Category::destroy($this->destroyId);
         $this->destroyId = null;
         $this->resetPage();

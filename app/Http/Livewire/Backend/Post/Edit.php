@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Backend\Post;
 
 use App\Models\Category;
 use App\Models\Post;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Str;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -11,6 +12,7 @@ use Livewire\WithFileUploads;
 class Edit extends Component
 {
     use WithFileUploads;
+    use AuthorizesRequests;
 
     public $post;
     public $title;
@@ -32,6 +34,7 @@ class Edit extends Component
 
     public function mount(Post $post)
     {
+        $this->authorize('view', $post);
         $this->post = $post;
         $this->title = $post->title;
         $this->body = $post->body;

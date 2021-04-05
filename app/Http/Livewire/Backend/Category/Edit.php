@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Backend\Category;
 
 use App\Models\Category;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
 use Livewire\Component;
 
@@ -11,17 +12,11 @@ class Edit extends Component
     public $category;
     public $name;
 
-    protected $rules = [
-        'name' => 'required'
-    ];
-
-    public function updated($propertyName)
-    {
-        $this->validateOnly($propertyName);
-    }
-
     public function mount(Category $category)
     {
+        if (! Gate::allows('isAdmin')) {
+            abort(403);
+        }
         $this->category = $category;
         $this->name = $category->name;
     }
@@ -35,7 +30,9 @@ class Edit extends Component
 
     public function update()
     {
-        $validatedData = $this->validate();
+        $validatedData = $this->validate([
+            'name' => "required|unique:categories,name," . $this->category->id
+        ]);
         $this->category->update([
             'name' => $validatedData['name'],
             'slug' => Str::slug($validatedData['name'])

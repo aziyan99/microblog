@@ -21,7 +21,7 @@
                                 <label>Category</label>
                                 <select wire:model="category_id"
                                         class="form-control @error('category_id') is-invalid @enderror">
-                                    <option value="">-- pilih --</option>
+                                    <option value="">-- choose --</option>
                                     @foreach ($categories as $category)
                                         <option value="{{ $category->id }}">{{ $category->name }}</option>
                                     @endforeach

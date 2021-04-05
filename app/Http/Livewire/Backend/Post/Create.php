@@ -45,7 +45,8 @@ class Create extends Component
             'slug' => Str::slug($validatedData['title']),
             'category_id' => $validatedData['category_id'],
             'body' => $validatedData['body'],
-            'thumbnail' => $thumbnail
+            'thumbnail' => $thumbnail,
+            'user_id' => auth()->user()->id
         ]);
         $this->resetForm();
         session()->flash('message', 'Post successfully saved.');

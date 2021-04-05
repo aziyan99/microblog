@@ -24,8 +24,6 @@
                                 <select wire:model="count" class="form-control align-middle mt-3 mb-3">
                                     <option value="5">5</option>
                                     <option value="10">10</option>
-                                    <option value=20"">20</option>
-                                    <option value=50"">50</option>
                                 </select>
                             </div>
                             <div class="col-10">
@@ -47,6 +45,7 @@
                             <th>ID</th>
                             <th>Title</th>
                             <th>Category</th>
+                            <th>Created by</th>
                             <th>Views</th>
                             <th>Created at</th>
                             <th>Action</th>
@@ -60,32 +59,37 @@
                                 <td>
                                     {{ $post->category->name }}
                                 </td>
+                                <td>{{ $post->user->name }}</td>
                                 <td>{{ $post->views }}</td>
                                 <td>{{ $post->created_at->diffForHumans() }}</td>
                                 <td>
-                                    <a href="{{ route('post.edit', $post->id) }}" class="btn btn-warning text-light mb-2">
-                                        <i class="mdi mdi-pencil-box-outline align-middle me-1"></i>
-                                        edit
-                                    </a>
+                                    @can('view', $post)
+                                        <a href="{{ route('post.edit', $post->id) }}" class="btn btn-warning text-light mb-2">
+                                            <i class="mdi mdi-pencil-box-outline align-middle me-1"></i>
+                                            edit
+                                        </a>
+                                    @endcan
                                     <a href="{{ route('post.detail', $post->id) }}" class="btn btn-info text-light mb-2">
                                         <i class="mdi mdi-eye-outline align-middle me-1"></i>
                                         detail
                                     </a>
-                                    @if($destroyId != $post->id)
-                                        <button type="button" wire:click="setDestroyId({{ $post->id }})" class="btn btn-danger mb-2 text-light">
-                                            <i class="mdi mdi-delete align-middle me-1"></i>
-                                            delete
-                                        </button>
-                                    @else
-                                        <button type="button" wire:click="destroy" class="btn btn-danger text-light mb-2">
-                                            <i class="mdi mdi-delete align-middle me-1"></i>
-                                            delete this data?
-                                        </button>
-                                        <button type="button" wire:click="cancelDestroy" class="btn btn-secondary text-light mb-2">
-                                            <i class="mdi mdi-repeat align-middle me-1"></i>
-                                            cancel delete
-                                        </button>
-                                    @endif
+                                    @can('view', $post)
+                                        @if($destroyId != $post->id)
+                                            <button type="button" wire:click="setDestroyId({{ $post->id }})" class="btn btn-danger mb-2 text-light">
+                                                <i class="mdi mdi-delete align-middle me-1"></i>
+                                                delete
+                                            </button>
+                                        @else
+                                            <button type="button" wire:click="destroy" class="btn btn-danger text-light mb-2">
+                                                <i class="mdi mdi-delete align-middle me-1"></i>
+                                                delete this data?
+                                            </button>
+                                            <button type="button" wire:click="cancelDestroy" class="btn btn-secondary text-light mb-2">
+                                                <i class="mdi mdi-repeat align-middle me-1"></i>
+                                                cancel delete
+                                            </button>
+                                        @endif
+                                    @endcan
                                 </td>
                             </tr>
                         @empty

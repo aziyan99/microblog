@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Backend\Post;
 
 use App\Exports\PostExport;
 use App\Models\Post;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -11,7 +12,7 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class Index extends Component
 {
-
+    use AuthorizesRequests;
     use WithPagination;
 
     protected $paginationTheme = 'bootstrap';
@@ -31,9 +32,8 @@ class Index extends Component
 
     public function render()
     {
-        //dd(Post::with('category')->where('title', 'LIKE', '%' . $this->search . '%')->paginate($this->count));
         return view('livewire.backend.post.index', [
-            'posts' => Post::with('category')
+            'posts' => Post::with('category', 'user')
                 ->where('posts.title', 'LIKE', '%' . $this->search . '%')
                 ->orWhere('posts.views', 'LIKE', '%' . $this->search . '%')
                 ->latest()
@@ -43,12 +43,15 @@ class Index extends Component
 
     public function setDestroyId($id)
     {
+        $post = Post::find($id);
+        $this->authorize('view', $post);
         $this->destroyId = $id;
     }
 
     public function destroy()
     {
         $post = Post::find($this->destroyId);
+        $this->authorize('view', $post);
         Storage::disk('public')->delete($post->thumbnail);
         Post::destroy($this->destroyId);
         $this->destroyId = null;
