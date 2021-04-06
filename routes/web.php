@@ -17,7 +17,7 @@ Route::get('/', function () {
     return response()->json(['msg' => 'Hello World'], 200);
 });
 
-Route::group(['prefix' => 'backend', 'middleware' => 'auth'], function (){
+Route::group(['prefix' => 'backend', 'middleware' => 'auth'], function () {
     Route::get('/dashboard', \App\Http\Livewire\Backend\Dashboard\Index::class)->name('dashboard');
 
     Route::get('/category', \App\Http\Livewire\Backend\Category\Index::class)->name('category.index');
@@ -33,6 +33,8 @@ Route::group(['prefix' => 'backend', 'middleware' => 'auth'], function (){
     Route::get('/users/create', \App\Http\Livewire\Backend\User\Create::class)->name('user.create');
     Route::get('/users/{user}/edit', \App\Http\Livewire\Backend\User\Edit::class)->name('user.edit');
 
+
+    Route::get('/message', \App\Http\Livewire\Backend\Message\Index::class)->name('message');
     Route::get('/profile', \App\Http\Livewire\Backend\Profile\Index::class)->name('profile');
     Route::get('/setting', \App\Http\Livewire\Backend\Setting\Index::class)->name('setting');
 });

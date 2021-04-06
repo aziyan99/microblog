@@ -31,7 +31,7 @@
                     </div>
                     <div class="form-group">
                         <button class="btn btn-primary">
-                            <i class="mdi mdi-save mr-2 align-middle"></i>
+                            <i class="mdi mdi-content-save me-2"></i>
                             Save
                         </button>
                     </div>
@@ -61,7 +61,7 @@
                     </div>
                     <div class="form-group">
                         <button class="btn btn-primary">
-                            <i class="mdi mdi-save mr-2 align-middle"></i>
+                            <i class="mdi mdi-content-save me-2"></i>
                             Save
                         </button>
                     </div>

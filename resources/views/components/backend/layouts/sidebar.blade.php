@@ -24,6 +24,13 @@
                         <i class="mdi mdi-newspaper"></i>
                         <span class="hide-menu">Posts</span>
                     </a>
+                </li><li class="sidebar-item">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('message') }}"
+                       aria-expanded="false">
+                        <i class="mdi mdi-message"></i>
+                        <span class="hide-menu">Message</span>
+                        <span class="ms-2 badge bg-info">{{ $inboxCount }}</span>
+                    </a>
                 </li>
                 @can('isAdmin')
                 <li class="sidebar-item">

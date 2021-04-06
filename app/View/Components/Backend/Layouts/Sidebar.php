@@ -2,10 +2,13 @@
 
 namespace App\View\Components\Backend\Layouts;
 
+use App\Models\Message;
 use Illuminate\View\Component;
 
 class Sidebar extends Component
 {
+    public $inboxCount = 0;
+
     /**
      * Create a new component instance.
      *
@@ -13,7 +16,7 @@ class Sidebar extends Component
      */
     public function __construct()
     {
-        //
+        $this->inboxCount = Message::where('receiver_id', auth()->user()->id)->count();
     }
 
     /**

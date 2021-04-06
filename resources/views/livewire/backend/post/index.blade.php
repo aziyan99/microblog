@@ -94,7 +94,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="6" class="text-center text-muted"><i>Post data is empty</i></td>
+                                <td colspan="7" class="text-center text-muted"><i>Post data is empty</i></td>
                             </tr>
                         @endforelse
                         </tbody>
