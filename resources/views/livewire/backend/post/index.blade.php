@@ -57,10 +57,12 @@
                                 <td>{{ $post->id }}</td>
                                 <td>{{ $post->title }}</td>
                                 <td>
-                                    {{ $post->category->name }}
+                                    <span class="badge bg-purple">{{ $post->category->name }}</span>
                                 </td>
                                 <td>{{ $post->user->name }}</td>
-                                <td>{{ $post->views }}</td>
+                                <td>
+                                    <span class="badge bg-megna">{{ $post->views }}</span>
+                                </td>
                                 <td>{{ $post->created_at->diffForHumans() }}</td>
                                 <td>
                                     @can('view', $post)

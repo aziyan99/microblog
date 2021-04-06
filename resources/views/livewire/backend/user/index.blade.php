@@ -60,7 +60,13 @@
                                 <td>
                                     {{ $user->email }}
                                 </td>
-                                <td>{{ $user->role }}</td>
+                                <td>
+                                    @if($user->role == "admin")
+                                        <span class="badge bg-success">{{ $user->role }}</span>
+                                    @else
+                                        <span class="badge bg-secondary">{{ $user->role }}</span>
+                                    @endif
+                                </td>
                                 <td>{{ $user->created_at->diffForHumans() }}</td>
                                 <td>
                                     @if(auth()->user()->id == $user->id)
