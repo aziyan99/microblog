@@ -18,7 +18,7 @@ class Create extends Component
     public $thumbnail;
 
     protected $rules = [
-        'title' => 'required',
+        'title' => 'required|unique:posts,title',
         'body' => 'required',
         'category_id' => 'required',
         'thumbnail' => 'required|image|max:1024'

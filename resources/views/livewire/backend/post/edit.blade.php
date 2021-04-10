@@ -58,10 +58,30 @@
                         <div class="col-lg-6 col-md-12">
                             <div class="form-group" wire:ignore>
                                 <label>Body</label>
-                                <textarea id="content" wire:model="body" cols="30" rows="10"
-                                          class="form-control @error('body') is-invalid @enderror"></textarea>
-                                @error('body') <small class="invalid-feedback" role="alert">{{ $message }}</small>
-                                @enderror
+                                <div
+                                    x-data
+                                    x-ref="quillEditor"
+                                    x-init="
+                                        toolbarOptions = [
+                                              [{ 'header': [] }, 'bold', 'italic', 'underline', 'strike',
+                                              { 'color': [] }, { 'background': [] }, { 'script': 'super' }, { 'script': 'sub' },
+                                              'blockquote', 'code-block', { 'list': 'ordered' }, { 'list': 'bullet'},
+                                              { 'align': [] }, 'link', 'image', 'video', 'formula', 'clean']
+                                        ];
+                                        quill = new Quill($refs.quillEditor, {
+                                            theme: 'snow',
+                                            modules: {
+                                                toolbar: toolbarOptions
+                                            }
+                                        });
+                                        quill.on('text-change', function () {
+                                          $dispatch('quill-input', quill.root.innerHTML);
+                                        });
+                                      "
+                                    x-on:quill-input.debounce.2000ms="@this.set('body', $event.detail)"
+                                >
+                                    {!! $body !!}
+                                </div>
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary">
@@ -80,21 +100,9 @@
         </div>
     </div>
 </div>
-
 @push('js')
-    <script>
-        $(document).ready(function() {
-            $('#content').summernote({
-                height: 300,
-                codemirror: {
-                    theme: 'monokai'
-                },
-                callbacks: {
-                    onChange: function(contents, $editable) {
-                    @this.set('body', contents);
-                    }
-                }
-            });
-        });
-    </script>
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+@endpush
+@push('css')
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
 @endpush

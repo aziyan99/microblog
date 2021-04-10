@@ -20,6 +20,11 @@
                         @error('name') <small class="invalid-feedback" role="alert">{{ $message }}</small> @enderror
                     </div>
                     <div class="form-group">
+                        <label>Short desc</label>
+                        <input type="text" wire:model="short_desc" class="form-control @error('short_desc') is-invalid @enderror">
+                        @error('short_desc') <small class="invalid-feedback" role="alert">{{ $message }}</small> @enderror
+                    </div>
+                    <div class="form-group">
                         <label>Facebook</label>
                         <input type="text" wire:model="facebook" class="form-control @error('facebook') is-invalid @enderror">
                         @error('facebook') <small class="invalid-feedback" role="alert">{{ $message }}</small> @enderror
@@ -40,7 +45,7 @@
                         @error('phone_number') <small class="invalid-feedback" role="alert">{{ $message }}</small> @enderror
                     </div>
                     <div class="form-group">
-                        <label>Phone Number</label>
+                        <label>Alamat</label>
                         <textarea cols="30" rows="4" wire:model="address" class="form-control @error('address') is-invalid @enderror"></textarea>
                         @error('address') <small class="invalid-feedback" role="alert">{{ $message }}</small> @enderror
                     </div>

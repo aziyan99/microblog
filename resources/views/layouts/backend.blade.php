@@ -20,7 +20,8 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
     @livewireStyles
-    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script>
+    @stack('css')
 </head>
 
 <body>
@@ -65,7 +66,6 @@
 <!--Custom JavaScript -->
 <script src="{{ asset('backend') }}/js/custom.min.js"></script>
 @livewireScripts
-<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
 @stack('js')
 </body>
 

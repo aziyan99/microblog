@@ -8,31 +8,31 @@
                     Create new post
                 </h4>
                 <form wire:submit.prevent="store">
-                <div class="row">
+                    <div class="row">
                         <div class="col-lg-6 col-md-12">
                             <div class="form-group">
                                 <label>Title</label>
                                 <input type="text" wire:model="title"
-                                    class="form-control @error('title') is-invalid @enderror" autofocus>
+                                       class="form-control @error('title') is-invalid @enderror" autofocus>
                                 @error('title') <small class="invalid-feedback" role="alert">{{ $message }}</small>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <label>Category</label>
                                 <select wire:model="category_id"
-                                    class="form-control @error('category_id') is-invalid @enderror">
+                                        class="form-control @error('category_id') is-invalid @enderror">
                                     <option value="">-- choose --</option>
                                     @foreach ($categories as $category)
                                         <option value="{{ $category->id }}">{{ $category->name }}</option>
                                     @endforeach
                                 </select>
                                 @error('category_id') <small class="invalid-feedback"
-                                    role="alert">{{ $message }}</small> @enderror
+                                                             role="alert">{{ $message }}</small> @enderror
                             </div>
                             <div class="form-group">
                                 <label>Thumbnail</label>
                                 <input type="file" wire:model="thumbnail"
-                                    class="form-control @error('thumbnail') is-invalid @enderror">
+                                       class="form-control @error('thumbnail') is-invalid @enderror">
                                 @error('thumbnail') <small class="invalid-feedback" role="alert">{{ $message }}</small>
                                 @enderror
                             </div>
@@ -51,10 +51,30 @@
                         <div class="col-lg-6 col-md-12">
                             <div class="form-group" wire:ignore>
                                 <label>Body</label>
-                                <textarea wire:model="body" id="content" cols="30" rows="10"
-                                    class="form-control @error('body') is-invalid @enderror" name="body">{{ $body }}</textarea>
-                                @error('body') <small class="invalid-feedback" role="alert">{{ $message }}</small>
-                                @enderror
+                                <div
+                                    x-data
+                                    x-ref="quillEditor"
+                                    x-init="
+                                        toolbarOptions = [
+                                              [{ 'header': [] }, 'bold', 'italic', 'underline', 'strike',
+                                              { 'color': [] }, { 'background': [] }, { 'script': 'super' }, { 'script': 'sub' },
+                                              'blockquote', 'code-block', { 'list': 'ordered' }, { 'list': 'bullet'},
+                                              { 'align': [] }, 'link', 'image', 'video', 'formula', 'clean']
+                                        ];
+                                        quill = new Quill($refs.quillEditor, {
+                                            theme: 'snow',
+                                            modules: {
+                                                toolbar: toolbarOptions
+                                            }
+                                        });
+                                        quill.on('text-change', function () {
+                                          $dispatch('quill-input', quill.root.innerHTML);
+                                        });
+                                      "
+                                    x-on:quill-input.debounce.2000ms="@this.set('body', $event.detail)"
+                                >
+                                    {!! $body !!}
+                                </div>
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary">
@@ -74,19 +94,8 @@
     </div>
 </div>
 @push('js')
-    <script>
-        $(document).ready(function() {
-            $('#content').summernote({
-                height: 300,
-                codemirror: {
-                    theme: 'monokai'
-                },
-                callbacks: {
-                    onChange: function(contents, $editable) {
-                    @this.set('body', contents);
-                    }
-                }
-            });
-        });
-    </script>
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+@endpush
+@push('css')
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
 @endpush

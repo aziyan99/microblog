@@ -22,6 +22,7 @@ class SettingSeeder extends Seeder
             'address' => "JALAN MEKAR BARU SATU DUA TIGA",
             'phone_number' => "(62) 822 5545 2232",
             'logo' => "default.png",
+            'short_desc' => 'lorem, ipsum dolor sit amet consectetur.'
         ]);
     }
 }

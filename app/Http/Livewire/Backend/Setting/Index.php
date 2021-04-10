@@ -18,6 +18,7 @@ class Index extends Component
     public $address;
     public $phone_number;
     public $logo;
+    public $short_desc;
     public $oldLogo;
 
     protected $rules = [
@@ -27,6 +28,7 @@ class Index extends Component
         'instagram' => 'required',
         'address' => 'required',
         'phone_number' => 'required',
+        'short_desc' => 'required'
     ];
 
     public function updated($propertyName)
@@ -43,6 +45,7 @@ class Index extends Component
         $this->address = $setting->address;
         $this->youtube = $setting->youtube;
         $this->phone_number = $setting->phone_number;
+        $this->short_desc = $setting->short_desc;
         $this->oldLogo = $setting->logo;
     }
 
