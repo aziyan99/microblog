@@ -45,7 +45,7 @@
                         @error('phone_number') <small class="invalid-feedback" role="alert">{{ $message }}</small> @enderror
                     </div>
                     <div class="form-group">
-                        <label>Alamat</label>
+                        <label>Address</label>
                         <textarea cols="30" rows="4" wire:model="address" class="form-control @error('address') is-invalid @enderror"></textarea>
                         @error('address') <small class="invalid-feedback" role="alert">{{ $message }}</small> @enderror
                     </div>

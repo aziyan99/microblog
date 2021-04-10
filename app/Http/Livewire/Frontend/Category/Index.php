@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Livewire\Frontend;
+namespace App\Http\Livewire\Frontend\Category;
 
-use App\Models\Setting;
 use App\Models\Category as CategoryData;
+use App\Models\Setting;
 use Livewire\Component;
 
-class Category extends Component
+class Index extends Component
 {
     public $categories;
 
@@ -18,7 +18,7 @@ class Category extends Component
     public function render()
     {
         $setting = Setting::first();
-        return view('livewire.frontend.category')
+        return view('livewire.frontend.category.index')
             ->extends('layouts.frontend', [
                 'title' => "Category | $setting->name"
             ])

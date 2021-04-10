@@ -13,11 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', App\Http\Livewire\Frontend\Home::class)->name('home');
-Route::get('/categories', App\Http\Livewire\Frontend\Category::class)->name('categories');
-Route::get('/about', App\Http\Livewire\Frontend\About::class)->name('about');
-Route::get('/category/{slug}', App\Http\Livewire\Frontend\Home::class)->name('home.category');
-Route::get('/{slug}', \App\Http\Livewire\Frontend\Read::class)->name('read');
+Route::get('/', App\Http\Livewire\Frontend\Home\Index::class)->name('home');
+Route::get('/categories', App\Http\Livewire\Frontend\Category\Index::class)->name('categories');
+Route::get('/about', App\Http\Livewire\Frontend\About\Index::class)->name('about');
+Route::get('/category/{slug}', App\Http\Livewire\Frontend\Category\Show::class)->name('home.category');
+Route::get('/{slug}', \App\Http\Livewire\Frontend\Read\Index::class)->name('read');
 
 
 Route::group(['prefix' => 'backend', 'middleware' => 'auth'], function () {
