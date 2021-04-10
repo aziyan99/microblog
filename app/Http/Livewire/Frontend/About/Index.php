@@ -10,7 +10,9 @@ class Index extends Component
     public function render()
     {
         $setting = Setting::first();
-        return view('livewire.frontend.about.index')
+        return view('livewire.frontend.about.index', [
+            'settingData' => Setting::first()
+            ])
             ->extends('layouts.frontend', [
                 'title' => "About me | $setting->name"
             ])

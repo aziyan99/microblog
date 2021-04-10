@@ -16,6 +16,9 @@ class Index extends Component
         $this->post = Post::with('category', 'user')
             ->where('slug', $slug)
             ->first();
+        if($this->post == null){
+            abort(404);
+        }
         $this->relatedPosts = Post::where('category_id', $this->post->category_id)
             ->limit(4)
             ->latest()

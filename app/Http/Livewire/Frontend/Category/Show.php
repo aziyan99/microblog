@@ -30,6 +30,10 @@ class Show extends Component
             ->where('categories.slug', $this->slug)
             ->first();
 
+        if ($posts == null){
+            abort(404);
+        }
+
         $setting = Setting::first();
 
         return view('livewire.frontend.category.show', [
